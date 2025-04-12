@@ -6,3 +6,6 @@ router.post('/register', register);
 router.post('/login', login);
 
 module.exports = router;
+
+// /api/auth/login
+// /api/auth/register
