@@ -28,6 +28,30 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  bio: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  profilePicture: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  website: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  isPrivate: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  isVerified: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  lastActive: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
 }, {
   hooks: {
     beforeCreate: async (user) => {
@@ -42,5 +66,9 @@ const User = sequelize.define('User', {
     },
   },
 });
+
+User.prototype.matchPassword = async function(enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
 module.exports = User;
