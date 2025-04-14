@@ -22,7 +22,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://tronix-ai.vercel.app/', // or use '*' to allow all origins (not recommended for prod)
+  credentials: true, // if you're sending cookies or auth headers
+}));
 app.use(express.json());
 
 
